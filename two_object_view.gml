@@ -1,4 +1,4 @@
-///two_object_view(object_to_follow, view_index)
+///two_object_view(object1, object2, view_index)
 /*************************************************
  *
  * Forces a view to follow a second object 
@@ -20,39 +20,39 @@ max_hview=room_height/minzoom       // sets the maximal height of the view
 
 
 // calculates the size and position of the view
-xdistance=point_distance(x,0,argument0.x,0)
-ydistance=point_distance(0,y,0,argument0.y)
+xdistance=point_distance(argument0.x,0,argument1.x,0)
+ydistance=point_distance(0,argument0.y,0,argument1.y)
 
 if xdistance/room_width>ydistance/room_height {
-  view_wview[argument1]=xdistance+room_width/4
+  view_wview[argument2]=xdistance+room_width/4
   
   // Cap view width
-  view_wview[argument1] = max(min_wview,view_wview[argument1])
-  view_wview[argument1] = min(max_wview,view_wview[argument1])
+  view_wview[argument2] = max(min_wview,view_wview[argument2])
+  view_wview[argument2] = min(max_wview,view_wview[argument2])
   
-  view_hview[argument1]=view_wview[argument1]/room_width*room_height
+  view_hview[argument2]=view_wview[argument2]/room_width*room_height
 } else {
-  view_hview[argument1]=ydistance+room_height/4
+  view_hview[argument2]=ydistance+room_height/4
   
   // Cap view height
-  view_hview[argument1] = max(min_hview,view_hview[argument1])
-  view_hview[argument1] = min(max_hview,view_hview[argument1])
+  view_hview[argument2] = max(min_hview,view_hview[argument2])
+  view_hview[argument2] = min(max_hview,view_hview[argument2])
 
-  view_wview[argument1]=view_hview[argument1]/room_height*room_width
+  view_wview[argument2]=view_hview[argument2]/room_height*room_width
 }
 
-view_xview[argument1]=(x+argument0.x)/2-view_wview[argument1]/2
-view_yview[argument1]=(y+argument0.y)/2-view_hview[argument1]/2
+view_xview[argument2]=(argument0.x+argument1.x)/2-view_wview[argument2]/2
+view_yview[argument2]=(argument0.y+argument1.y)/2-view_hview[argument2]/2
 
 // keeps the view inside the room
-if(view_xview[argument1]+view_wview[argument1]>room_width)
-  view_xview[argument1]=room_width-view_wview[argument1]
+if(view_xview[argument2]+view_wview[argument2]>room_width)
+  view_xview[argument2]=room_width-view_wview[argument2]
 
-if(view_yview[argument1]+view_hview[argument1]>room_height)
-  view_yview[argument1]=room_height-view_hview[argument1]
+if(view_yview[argument2]+view_hview[argument2]>room_height)
+  view_yview[argument2]=room_height-view_hview[argument2]
 
-view_xview[argument1] = max(view_xview[argument1],0)
-view_yview[argument1] = max(view_yview[argument1],0)
+view_xview[argument2] = max(view_xview[argument2],0)
+view_yview[argument2] = max(view_yview[argument2],0)
 
 // Scale the view resolution based on the new size 
-surface_resize(application_surface, view_wview[argument1], view_hview[argument1])
+surface_resize(application_surface, view_wview[argument2], view_hview[argument2])
