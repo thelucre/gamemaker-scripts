@@ -1,6 +1,6 @@
 /**************************************************
  *
- * log(arg1, arg2, ...)
+ * Log(arg1, arg2, ...)
  * Stringify and log x number of arguments to the console 
  *
  **************************************************/
