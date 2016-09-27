@@ -1,4 +1,4 @@
-///two_object_view(object1, object2, view_index)
+///TwoObjectView(object1, object2, view_index)
 /*************************************************
  *
  * Forces a view to follow a second object 
